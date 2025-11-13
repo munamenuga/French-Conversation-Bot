@@ -56,9 +56,9 @@ This project is a WhatsApp bot that helps users practice French through AI-power
 3. ✅ Server configured and running
 
 ### User Actions Required
-1. Create Twilio account
-2. Set up WhatsApp sandbox
-3. Configure webhook URL in Twilio
+1. ✅ Create Twilio account
+2. ✅ Set up WhatsApp sandbox  
+3. Configure webhook URL in Twilio: `https://e4c4f871-a75d-424e-ab8a-7e28ddeda1ac-00-39e0hj2md1mca.worf.replit.dev/webhook`
 4. Test with WhatsApp messages
 
 ## How It Works

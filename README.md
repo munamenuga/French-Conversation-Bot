@@ -49,7 +49,7 @@ Now you need to tell Twilio where to send incoming WhatsApp messages:
 
 3. **Configure the Webhook URL**
    - In the sandbox settings, find the field labeled **"When a message comes in"**
-   - Enter your webhook URL: `https://workspace.munascode.repl.co/webhook`
+   - Enter your webhook URL: `https://e4c4f871-a75d-424e-ab8a-7e28ddeda1ac-00-39e0hj2md1mca.worf.replit.dev/webhook`
    - Make sure the method is set to **POST**
    - Click **Save**
 
