@@ -1,0 +1,24 @@
+{
+  "name": "whatsapp-french-tutor",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "whatsapp",
+    "french",
+    "learning",
+    "bot",
+    "openai"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "WhatsApp bot for practicing French with AI-powered conversation, error correction, and vocabulary logging",
+  "dependencies": {
+    "express": "^4.21.2",
+    "openai": "^6.8.1",
+    "twilio": "^4.23.0"
+  }
+}
