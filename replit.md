@@ -5,10 +5,11 @@ This project is a WhatsApp bot that helps users practice French through AI-power
 
 ## Current State
 - ✅ Server running on port 5000
-- ✅ OpenAI integration configured
+- ✅ OpenAI integration configured (GPT-4)
+- ✅ Twilio account connected (+14155238886)
 - ✅ Twilio webhook endpoints ready
 - ✅ Vocabulary logging system implemented
-- ⏳ Awaiting Twilio WhatsApp configuration
+- ⏳ User needs to configure webhook URL in Twilio Console
 
 ## Recent Changes (November 13, 2025)
 - Created Node.js project with Express server

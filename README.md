@@ -28,29 +28,34 @@ The bot uses:
 
 ### 2. OpenAI API Key
 
-You've already added your OpenAI API key. It's securely stored as an environment variable.
+✅ **Already configured!** Your OpenAI API key is securely stored.
 
-### 3. Twilio WhatsApp Setup
+### 3. Twilio Connection
 
-1. **Create a Twilio Account**
-   - Go to [twilio.com](https://www.twilio.com) and sign up
-   - Complete the verification process
+✅ **Already connected!** Your Twilio account is connected with phone number: **+14155238886**
 
-2. **Set Up WhatsApp Sandbox** (for testing)
-   - In Twilio Console, go to **Messaging** → **Try it out** → **Send a WhatsApp message**
-   - Follow the instructions to join the sandbox by sending a code to the Twilio WhatsApp number
-   - Note: This is for testing. For production, you'll need to request WhatsApp Business API access
+### 4. Configure WhatsApp Webhook
 
-3. **Configure Webhook**
-   - In the WhatsApp Sandbox settings, find the "When a message comes in" field
-   - Enter your webhook URL: `https://your-repl-url/webhook`
-   - To get your Repl URL, look at the webview window - it will be something like `https://[project-name].[username].repl.co`
-   - Set the method to **POST**
-   - Save the configuration
+Now you need to tell Twilio where to send incoming WhatsApp messages:
 
-### 4. Test Your Bot
+1. **Go to Twilio Console**
+   - Visit [Twilio Console](https://console.twilio.com/)
+   - Navigate to **Messaging** → **Try it out** → **Send a WhatsApp message**
 
-1. Send a message to the Twilio WhatsApp number (from the sandbox setup)
+2. **Join the WhatsApp Sandbox** (if you haven't already)
+   - You'll see instructions to send a code (like "join [word]-[word]") to the WhatsApp number **+14155238886**
+   - Send that message from your phone via WhatsApp
+   - You'll receive a confirmation that you've joined the sandbox
+
+3. **Configure the Webhook URL**
+   - In the sandbox settings, find the field labeled **"When a message comes in"**
+   - Enter your webhook URL: `https://workspace.munascode.repl.co/webhook`
+   - Make sure the method is set to **POST**
+   - Click **Save**
+
+### 5. Test Your Bot
+
+1. Send a message to **+14155238886** via WhatsApp
 2. The bot will respond in French!
 3. Try messages like:
    - "Bonjour! Comment ça va?" (Hello! How are you?)

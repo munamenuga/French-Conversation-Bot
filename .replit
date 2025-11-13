@@ -1,7 +1,7 @@
-modules = ["nodejs-20"]
+modules = ["nodejs-20", "python-3.11"]
 [agent]
 expertMode = true
-integrations = ["javascript_openai:1.0.0"]
+integrations = ["javascript_openai:1.0.0", "twilio:1.0.0"]
 
 [nix]
 channel = "stable-25_05"
@@ -33,7 +33,3 @@ outputType = "webview"
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[[ports]]
-localPort = 43515
-externalPort = 3000

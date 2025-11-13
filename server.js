@@ -15,6 +15,64 @@ const openai = new OpenAI({
 
 const vocabularyLogger = new VocabularyLogger('./vocabulary.json');
 
+let twilioClient = null;
+let twilioPhoneNumber = null;
+
+async function getTwilioCredentials() {
+  const hostname = process.env.REPLIT_CONNECTORS_HOSTNAME;
+  const xReplitToken = process.env.REPL_IDENTITY 
+    ? 'repl ' + process.env.REPL_IDENTITY 
+    : process.env.WEB_REPL_RENEWAL 
+    ? 'depl ' + process.env.WEB_REPL_RENEWAL 
+    : null;
+
+  if (!xReplitToken || !hostname) {
+    console.log('⚠️  Twilio connection not available - using basic webhook mode');
+    return null;
+  }
+
+  try {
+    const response = await fetch(
+      'https://' + hostname + '/api/v2/connection?include_secrets=true&connector_names=twilio',
+      {
+        headers: {
+          'Accept': 'application/json',
+          'X_REPLIT_TOKEN': xReplitToken
+        }
+      }
+    );
+    
+    const data = await response.json();
+    const connectionSettings = data.items?.[0];
+
+    if (!connectionSettings || !connectionSettings.settings.account_sid || !connectionSettings.settings.api_key || !connectionSettings.settings.api_key_secret) {
+      console.log('⚠️  Twilio not fully configured - using basic webhook mode');
+      return null;
+    }
+    
+    return {
+      accountSid: connectionSettings.settings.account_sid,
+      apiKey: connectionSettings.settings.api_key,
+      apiKeySecret: connectionSettings.settings.api_key_secret,
+      phoneNumber: connectionSettings.settings.phone_number
+    };
+  } catch (error) {
+    console.error('Error fetching Twilio credentials:', error);
+    return null;
+  }
+}
+
+async function initializeTwilio() {
+  const credentials = await getTwilioCredentials();
+  if (credentials) {
+    twilioClient = twilio(credentials.apiKey, credentials.apiKeySecret, {
+      accountSid: credentials.accountSid
+    });
+    twilioPhoneNumber = credentials.phoneNumber;
+    console.log(`✅ Twilio connected with phone number: ${twilioPhoneNumber}`);
+  }
+}
+
 const conversationHistory = new Map();
 
 const SYSTEM_PROMPT = `Tu es un professeur de français très patient et encourageant. Ton rôle est d'aider les étudiants à pratiquer le français en suivant ces règles:
@@ -206,7 +264,13 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'WhatsApp French Tutor is running!' });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🇫🇷 WhatsApp French Tutor Bot démarré sur le port ${PORT}`);
-  console.log(`Webhook endpoint: http://localhost:${PORT}/webhook`);
-});
+async function startServer() {
+  await initializeTwilio();
+  
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🇫🇷 WhatsApp French Tutor Bot démarré sur le port ${PORT}`);
+    console.log(`Webhook endpoint: http://localhost:${PORT}/webhook`);
+  });
+}
+
+startServer();
