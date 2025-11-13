@@ -105,7 +105,7 @@ async function getFrenchResponse(userMessage, phoneNumber) {
   
   try {
     const response = await openai.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4o-mini',
       messages: history,
       temperature: 0.7,
       max_tokens: 500
